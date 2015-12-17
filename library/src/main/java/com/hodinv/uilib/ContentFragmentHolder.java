@@ -22,4 +22,5 @@ public interface ContentFragmentHolder {
 
     void showProgress(String title);
 
+    void runOnUiThread(Runnable runnable);
 }

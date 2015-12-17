@@ -106,7 +106,7 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
      *
      * @param action
      */
-    private void checkRef(IfHasActivity action) {
+    protected void checkRef(IfHasActivity action) {
         ContentFragmentHolder holder = mHolderRef.get();
         if (holder != null) {
             action.doAction(holder);
@@ -119,7 +119,7 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
      * @param action
      * @param actionIfNoActivity
      */
-    private void checkRef(IfHasActivity action, Runnable actionIfNoActivity) {
+    protected void checkRef(IfHasActivity action, Runnable actionIfNoActivity) {
         ContentFragmentHolder holder = mHolderRef.get();
         if (holder != null) {
             action.doAction(holder);
@@ -127,7 +127,7 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
     }
 
 
-    interface IfHasActivity {
+    protected interface IfHasActivity {
         void doAction(@NonNull ContentFragmentHolder holder);
     }
 
@@ -234,6 +234,16 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
             @Override
             public void doAction(@NonNull ContentFragmentHolder holder) {
                 holder.showProgress(title);
+            }
+        });
+    }
+
+    @Override
+    public void runOnUiThread(final Runnable runnable) {
+        checkRef(new IfHasActivity() {
+            @Override
+            public void doAction(@NonNull ContentFragmentHolder holder) {
+                holder.runOnUiThread(runnable);
             }
         });
     }
