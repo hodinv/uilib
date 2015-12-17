@@ -17,4 +17,15 @@ public class FirstFragment extends ContentFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return LayoutInflater.from(getContext()).inflate(R.layout.activity_main, container, false);
     }
+
+    @Override
+    public String getTitle() {
+        return "Hello";
+    }
+
+    @Override
+    public void updateUI() {
+        super.updateUI();
+        showProgress("Hello");
+    }
 }
