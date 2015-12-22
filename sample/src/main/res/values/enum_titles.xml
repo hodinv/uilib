@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="titles_first">First fragment</string>
+    <string name="titles_second">Second fragment</string>
+</resources>

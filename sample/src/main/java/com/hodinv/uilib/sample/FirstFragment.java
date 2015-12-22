@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hodinv.uilib.ContentFragment;
+import com.hodinv.uilib.utils.EnumsHelper;
 
 /**
  * Created by vhodin on 17.12.2015.
@@ -24,7 +25,7 @@ public class FirstFragment extends ContentFragment {
 
     @Override
     public String getTitle() {
-        return "First";
+        return EnumsHelper.getInstance().getTitle(Titles.FIRST);
     }
 
     @Override
