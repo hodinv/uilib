@@ -13,6 +13,7 @@ import com.hodinv.uilib.ContentFragment;
 import com.hodinv.uilib.utils.EnumsHelper;
 
 /**
+ * Demo of main fragment
  * Created by vhodin on 17.12.2015.
  */
 public class FirstFragment extends ContentFragment {

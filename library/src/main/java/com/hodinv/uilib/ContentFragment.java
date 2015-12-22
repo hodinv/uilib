@@ -7,8 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.hodinv.uilib.utils.KeyboardHelper;
-
 import java.lang.ref.WeakReference;
 
 /**
@@ -18,7 +16,7 @@ import java.lang.ref.WeakReference;
 public class ContentFragment extends Fragment implements ContentFragmentHolder {
 
 
-    private WeakReference<ContentFragmentHolder> mHolderRef = new WeakReference<ContentFragmentHolder>(null);
+    private WeakReference<ContentFragmentHolder> mHolderRef = new WeakReference<>(null);
 
 
     /**
@@ -90,7 +88,7 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         super.onAttach(context);
         Activity activity = getActivity();
         if (activity instanceof ContentFragmentHolder) {
-            mHolderRef = new WeakReference<ContentFragmentHolder>((ContentFragmentHolder) activity);
+            mHolderRef = new WeakReference<>((ContentFragmentHolder) activity);
             ((ContentFragmentHolder) activity).updateUI();
         } else {
             throw new RuntimeException("ContentFragment can be used only in ContentHolderActivity self or inherited classes");

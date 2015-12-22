@@ -20,7 +20,7 @@ public class ResourcesHelper {
                     ids.add(resId);
                 }
             } catch (Exception e) {
-                continue;
+
             }
         }
         int result[] = new int[ids.size()];

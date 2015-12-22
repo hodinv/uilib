@@ -11,11 +11,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Content fragment conectied with ControlledAsycTask to manage lifecycle (cancel in onStop)
  * Created by vhodin on 17.12.2015.
  */
 public class AsyncTasksContentFragment extends ContentFragment {
     @SuppressWarnings("rawtypes")
-    private List<ControlledAsyncTask> taskToCancel = new LinkedList<ControlledAsyncTask>();
+    private List<ControlledAsyncTask> taskToCancel = new LinkedList<>();
 
 
     @SuppressWarnings({"rawtypes", "unchecked"})

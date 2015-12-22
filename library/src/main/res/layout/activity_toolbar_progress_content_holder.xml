@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/progress_title_color"
-                android:textSize="@dimen/font_normal"/>
+                android:textSize="@dimen/progress_font_size"/>
 
             <ProgressBar
                 android:layout_width="wrap_content"

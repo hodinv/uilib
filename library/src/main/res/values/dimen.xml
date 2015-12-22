@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="font_normal">16dp</dimen>
-    <dimen name="font_small">12dp</dimen>
-    <dimen name="font_large">24dp</dimen>
+    <dimen name="progress_font_size">16sp</dimen>
 </resources>

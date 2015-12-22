@@ -10,6 +10,7 @@ import com.hodinv.uilib.ContentFragment;
 import com.hodinv.uilib.utils.EnumsHelper;
 
 /**
+ * Demo of second available fragment in menu
  * Created by vhodin on 17.12.2015.
  */
 public class SecondFragment extends ContentFragment {
