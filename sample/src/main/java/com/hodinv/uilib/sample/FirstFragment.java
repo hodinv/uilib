@@ -36,7 +36,7 @@ public class FirstFragment extends ContentFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_sub) {
-            startFragmentWithStacking(new SubFragment());
+            startFragmentWithStacking(new SubFragment().arguments().putString(SubFragment.KEY, "info").build());
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -283,4 +283,57 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         });
     }
 
+
+    public ArgumentsBuilder arguments() {
+        return new ArgumentsBuilder(this);
+    }
+
+
+    public static class ArgumentsBuilder {
+        private final Bundle mBundle;
+        private ContentFragment mContentFragment;
+
+        public ArgumentsBuilder(ContentFragment contentFragment) {
+            mContentFragment = contentFragment;
+            mBundle = new Bundle();
+        }
+
+        public ArgumentsBuilder putString(String key, String value) {
+            mBundle.putString(key, value);
+            return this;
+        }
+
+        public ArgumentsBuilder putInt(String key, int value) {
+            mBundle.putInt(key, value);
+            return this;
+        }
+
+        public ArgumentsBuilder putLong(String key, long value) {
+            mBundle.putLong(key, value);
+            return this;
+        }
+
+
+        public ArgumentsBuilder putBoolean(String key, boolean value) {
+            mBundle.putBoolean(key, value);
+            return this;
+        }
+
+        public ArgumentsBuilder putFloat(String key, float value) {
+            mBundle.putFloat(key, value);
+            return this;
+        }
+
+        public ArgumentsBuilder putDouble(String key, double value) {
+            mBundle.putDouble(key, value);
+            return this;
+        }
+
+        public ContentFragment build() {
+            mContentFragment.setArguments(mBundle);
+            return mContentFragment;
+        }
+
+    }
+
 }
