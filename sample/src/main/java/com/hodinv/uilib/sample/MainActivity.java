@@ -1,11 +1,6 @@
 package com.hodinv.uilib.sample;
 
-import android.util.Log;
-
-import com.hodinv.uilib.ContentHolderActivity;
-import com.hodinv.uilib.LeftMenuContentHolderActivity;
-import com.hodinv.uilib.ProgressContentHolderActivity;
-import com.hodinv.uilib.ToolbarContentHolderActivity;
+import com.hodinv.uilib.activities.LeftMenuContentHolderActivity;
 import com.hodinv.uilib.utils.ResourcesHelper;
 
 public class MainActivity extends LeftMenuContentHolderActivity {

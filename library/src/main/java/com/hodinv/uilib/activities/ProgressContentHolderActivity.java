@@ -1,7 +1,10 @@
-package com.hodinv.uilib;
+package com.hodinv.uilib.activities;
 
 import android.view.View;
 import android.widget.TextView;
+
+import com.hodinv.uilib.ContentHolderActivity;
+import com.hodinv.uilib.R;
 
 /**
  * Created by Vasily Hodin on 13.07.15.

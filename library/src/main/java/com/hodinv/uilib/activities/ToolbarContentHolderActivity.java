@@ -1,8 +1,11 @@
-package com.hodinv.uilib;
+package com.hodinv.uilib.activities;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import com.hodinv.uilib.ContentFragment;
+import com.hodinv.uilib.R;
 
 /**
  * Created by Vasily Hodin on 8.7.15.

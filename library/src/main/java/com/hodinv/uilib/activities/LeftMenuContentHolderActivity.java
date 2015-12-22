@@ -1,4 +1,4 @@
-package com.hodinv.uilib;
+package com.hodinv.uilib.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.hodinv.uilib.ContentFragment;
+import com.hodinv.uilib.R;
 import com.hodinv.uilib.utils.KeyboardHelper;
 
 /**

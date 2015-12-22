@@ -1,4 +1,6 @@
-package com.hodinv.uilib;
+package com.hodinv.uilib.rx;
+
+import com.hodinv.uilib.ContentFragment;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
