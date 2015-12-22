@@ -14,6 +14,10 @@ public interface ContentFragmentHolder {
 
     void setTitle(int titleId);
 
+    void toggleMenu();
+
+    void setMenuEnabled(boolean enabled);
+
     void showProgress();
 
     void hideProgress();
@@ -23,4 +27,6 @@ public interface ContentFragmentHolder {
     void showProgress(String title);
 
     void runOnUiThread(Runnable runnable);
+
+    void updateUI();
 }

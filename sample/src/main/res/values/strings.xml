@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UILib</string>
+    <string name="menu_sub">Child fragment</string>
 </resources>

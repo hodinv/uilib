@@ -65,6 +65,7 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
     /**
      * Here base UI logic. Currently - changin of activity title
      */
+    @Override
     public void updateUI() {
         checkRef(new IfHasActivity() {
             @Override
@@ -90,6 +91,7 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         Activity activity = getActivity();
         if (activity instanceof ContentFragmentHolder) {
             mHolderRef = new WeakReference<ContentFragmentHolder>((ContentFragmentHolder) activity);
+            ((ContentFragmentHolder) activity).updateUI();
         } else {
             throw new RuntimeException("ContentFragment can be used only in ContentHolderActivity self or inherited classes");
         }
@@ -155,6 +157,15 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
     }
 
 
+    /**
+     * Return id of left menu to show as selected (as current)
+     *
+     * @return
+     */
+    public int getMenuId() {
+        return 0;
+    }
+
     @Override
     public void startFragment(final ContentFragment contentFragment) {
         checkRef(new IfHasActivity() {
@@ -175,6 +186,10 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         });
     }
 
+    public boolean hasLeftMenu() {
+        return true;
+    }
+
 
     @Override
     public void setTitle(final CharSequence title) {
@@ -192,6 +207,26 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
             @Override
             public void doAction(@NonNull ContentFragmentHolder holder) {
                 holder.setTitle(titleId);
+            }
+        });
+    }
+
+    @Override
+    public void toggleMenu() {
+        checkRef(new IfHasActivity() {
+            @Override
+            public void doAction(@NonNull ContentFragmentHolder holder) {
+                holder.toggleMenu();
+            }
+        });
+    }
+
+    @Override
+    public void setMenuEnabled(final boolean enabled) {
+        checkRef(new IfHasActivity() {
+            @Override
+            public void doAction(@NonNull ContentFragmentHolder holder) {
+                holder.setMenuEnabled(enabled);
             }
         });
     }

@@ -45,7 +45,7 @@ public class ToolbarContentHolderActivity extends ProgressContentHolderActivity 
     }
 
     @Override
-    protected void updateUI() {
+    public void updateUI() {
         super.updateUI();
         ContentFragment currentFragment = getCurrentFragment();
         boolean showToolbar = currentFragment == null || currentFragment.showToolbar();

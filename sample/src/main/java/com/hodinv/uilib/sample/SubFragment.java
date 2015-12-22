@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,7 +13,7 @@ import com.hodinv.uilib.ContentFragment;
 /**
  * Created by vhodin on 17.12.2015.
  */
-public class FirstFragment extends ContentFragment {
+public class SubFragment extends ContentFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,25 +23,11 @@ public class FirstFragment extends ContentFragment {
 
     @Override
     public String getTitle() {
-        return "First";
+        return "Child";
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_sub) {
-            startFragmentWithStacking(new SubFragment());
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public int getMenuId() {
-        return R.id.menu_first;
+    public boolean hasLeftMenu() {
+        return false;
     }
 }

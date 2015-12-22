@@ -15,16 +15,16 @@
             android:id="@+id/lyt_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:titleTextColor="@color/toolbar_text"
-            android:background="@color/toolbar_back"
-            app:layout_collapseMode="pin"/>
+            android:background="?attr/colorPrimary"
+            app:layout_collapseMode="pin"
+            app:theme="?attr/actionBarTheme"/>
 
 
         <FrameLayout
             android:id="@+id/lyt_content"
             android:layout_width="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"/>
 
 
         <LinearLayout

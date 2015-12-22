@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="?attr/colorPrimaryDark"
+              android:orientation="vertical"
+              android:padding="12dp">
+
+    <TextView
+        android:id="@+id/menu_first"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/menu_background"
+        android:gravity="center_vertical"
+        android:text="Menu item1"
+        android:textColor="@color/colorText"/>
+
+    <TextView
+        android:id="@+id/menu_second"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/menu_background"
+        android:gravity="center_vertical"
+        android:text="Menu item2"
+        android:textColor="@color/colorText"/>
+
+</LinearLayout>

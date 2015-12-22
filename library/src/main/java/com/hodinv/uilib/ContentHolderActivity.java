@@ -96,6 +96,16 @@ public class ContentHolderActivity extends AppCompatActivity implements ContentF
     }
 
     @Override
+    public void toggleMenu() {
+        // do nothing
+    }
+
+    @Override
+    public void setMenuEnabled(boolean enabled) {
+        // do nothing
+    }
+
+    @Override
     public void showProgress() {
         // Do nothing
     }
@@ -139,7 +149,8 @@ public class ContentHolderActivity extends AppCompatActivity implements ContentF
     /**
      * Occurs just after fragment changes - here can be updated for ex. title
      */
-    protected void updateUI() {
+    @Override
+    public void updateUI() {
         ContentFragment contentFragment = getCurrentFragment();
         if (contentFragment != null) {
             contentFragment.updateUI();
