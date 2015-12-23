@@ -12,13 +12,6 @@ import android.support.v7.app.AppCompatActivity;
  */
 public class ContentHolderActivity extends AppCompatActivity implements ContentFragmentHolder {
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setupUI();
-    }
-
     /**
      * Return base layout for activity
      * Layout should contain resurce iten with id=lyt_content
@@ -38,6 +31,64 @@ public class ContentHolderActivity extends AppCompatActivity implements ContentF
             throw new RuntimeException("Element with id=lyt_content not found");
         }
     }
+
+
+    /**
+     * Process back logic. Soft back will not quit activity
+     *
+     * @param soft if true than caused be menu back pressed. if false - hardware back button was pressed.
+     */
+    @Override
+    public void back(boolean soft) {
+        ContentFragment fragment = getCurrentFragment();
+        if (fragment != null) {
+            if (getCurrentFragment().onBack(soft)) {
+                return;
+            }
+        }
+        goBack(soft);
+
+    }
+
+    /**
+     * Check if we can exit without confirmation. If activity requies confirmation to exit - override it
+     *
+     * @return true if confirmation os not needed
+     */
+    @UiThread
+    protected boolean canExitImmediate() {
+        return true;
+    }
+
+
+    /**
+     * Ask for confirmation of exit. If confirmation needed - it can be done here
+     *
+     * @param exitAction do it if confirmed (here stanmdart exit code of activity. Should be run in UI thread
+     */
+    @UiThread
+    protected void confirmExit(Runnable exitAction) {
+        exitAction.run();
+    }
+
+
+    /**
+     * Will be triggered just before exit
+     * Here can be applied some exit-time logic
+     */
+    @UiThread
+    protected void onExit() {
+        // do nothing
+    }
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setupUI();
+    }
+
 
     /**
      * Clears fragment stack and start new fragemtn
@@ -78,22 +129,7 @@ public class ContentHolderActivity extends AppCompatActivity implements ContentF
         return (ContentFragment) getSupportFragmentManager().findFragmentById(R.id.lyt_content);
     }
 
-    /**
-     * Process back logic. Soft back will not quit activity
-     *
-     * @param soft if true than caused be menu back pressed. if false - hardware back button was pressed.
-     */
-    @Override
-    public void back(boolean soft) {
-        ContentFragment fragment = getCurrentFragment();
-        if (fragment != null) {
-            if (getCurrentFragment().onBack(soft)) {
-                return;
-            }
-        }
-        goBack(soft);
 
-    }
 
     @Override
     public void toggleMenu() {
@@ -179,34 +215,5 @@ public class ContentHolderActivity extends AppCompatActivity implements ContentF
     };
 
 
-    /**
-     * Check if we can exit without confirmation. If activity requies confirmation to exit - override it
-     *
-     * @return true if confirmation os not needed
-     */
-    @UiThread
-    protected boolean canExitImmediate() {
-        return true;
-    }
 
-
-    /**
-     * Ask for confirmation of exit. If confirmation needed - it can be done here
-     *
-     * @param exitAction do it if confirmed (here stanmdart exit code of activity. Should be run in UI thread
-     */
-    @UiThread
-    protected void confirmExit(Runnable exitAction) {
-        exitAction.run();
-    }
-
-
-    /**
-     * Will be triggered just before exit
-     * Here can be applied some exit-time logic
-     */
-    @UiThread
-    protected void onExit() {
-        // do nothing
-    }
 }
