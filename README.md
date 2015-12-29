@@ -1,9 +1,9 @@
-<h1>UILib</h1>
+UILib
 =======
 
 Boilerplate for application with some common types of applications and some helpers
 
-<h2>Main parts</h2>
+Main parts
 -------------
  
 1. [Activities templates](#ref_activities)
