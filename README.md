@@ -4,7 +4,7 @@
 Boilerplate for application with some common types of applications and some helpers
 
 <h2>Main parts</h2>
-------------
+-------------
  
 1. [Activities templates](#ref_activities)
     * [Base content fragment holder](#ref_activities_base_content_holder)
