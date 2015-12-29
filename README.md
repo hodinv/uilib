@@ -71,21 +71,16 @@ However you should run UI function in UI thread.
 
 Other methods to override to change behavior:
 
+Method                           | Info
 -------------------------------------------------------------------------------------------------------------------
-| boolean showToolbar()            | for activity with toolbar. if false - will hide toolbar                      |
--------------------------------------------------------------------------------------------------------------------
-| boolean onBack(boolean soft)     | if back pressed here you can process it and consime (do not do default logic |
--------------------------------------------------------------------------------------------------------------------
-| String getTitle()                | title that is dynamicaly changed - has more priority than getDefaultTitle    |
--------------------------------------------------------------------------------------------------------------------
-| int getDefaultTitle()            | defult title string resource                                                 |
--------------------------------------------------------------------------------------------------------------------
-| int getMenuId()                  | for activity with left menu. current menu to show selected                   |
--------------------------------------------------------------------------------------------------------------------
-| boolean hasLeftMenu()            | for activity with left menu. if false will hide menu and show back arrow     |
--------------------------------------------------------------------------------------------------------------------
-| ArgumentsBuilder arguments()     |  simple builder to pass argument to frgamnet (just helper for setArguments)  |
--------------------------------------------------------------------------------------------------------------------
+boolean showToolbar()            | for activity with toolbar. if false - will hide toolbar
+boolean onBack(boolean soft)     | if back pressed here you can process it and consime (do not do default logic)
+String getTitle()                | title that is dynamicaly changed - has more priority than getDefaultTitle    
+int getDefaultTitle()            | defult title string resource                                                 
+int getMenuId()                  | for activity with left menu. current menu to show selected                   
+boolean hasLeftMenu()            | for activity with left menu. if false will hide menu and show back arrow     
+ArgumentsBuilder arguments()     |  simple builder to pass argument to frgamnet (just helper for setArguments)  
+
 
 
 
