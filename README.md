@@ -7,9 +7,9 @@ Main parts
 ----------
  
 1. [Activities templates](#ref_activities)
-    * [Base content fragment holder]{#ref_activities_base_content_holder}
-    * [Base content fragment]{#ref_activities_base_content}
-    * Progress
+    * [Base content fragment holder](#ref_activities_base_content_holder)
+    * [Base content fragment](#ref_activities_base_content)
+    * [Progress](#ref_activities_progress)
     * Toolbar
     * Left menu
 2. Async process handling
@@ -55,7 +55,7 @@ and do call exit stuff if confirmed
 <a name="ref_activities_base_content"/>
 ## 1.2 Base content fragment
 
-Holds reference to content holder activity and can be used only inside such activity. 
+Class ContentFragment holds reference to content holder activity and can be used only inside such activity. 
 Has mechanism to do stuff with base activity in safe mode (NPE safe)
 Example for set title. checkRef will check of base activty is still presend and attached and if ok will run code 
 in doAction passing content fragment holder interface
@@ -84,7 +84,20 @@ int getMenuId()                  | for activity with left menu. current menu to 
 boolean hasLeftMenu()            | for activity with left menu. if false will hide menu and show back arrow     
 ArgumentsBuilder arguments()     |  simple builder to pass argument to frgamnet (just helper for setArguments)  
 
+<a name="ref_activities_progress"/>
+## 1.3 Progress
 
+Activity ProgressContentHolderActivity inherits all from ContentFragmentHolderActivty and adds progress functionality
+View from getDefaultLayout should have ProgressBar with id = lyt_progress and TextView for progress title with id = txt_progress_title
+By default progress overlaps all functionality and in next activities 
+(toolbar activity - overlaps toolbar, in left menu activity - hides left menu and disables it)
+
+Methods                         | Info
+--------------------------------|-----------------------------------------------------------------------------------------
+void showProgress               | Show progress without title
+void hideProgress               | Hides progress (for left menu activity if menu was enabled before progress - enables it)
+void showProgress(int titleId)  | show progress with title from string resource
+void showProgress(String title) | show progress with title 
 
 
 
