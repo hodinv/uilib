@@ -7,8 +7,8 @@ Main parts
 ----------
  
 1. [Activities templates](#ref_activities)
-    * Base content fragment holder
-    * Base content fragment
+    * [Base content fragment holder]{#ref_activities_base_content_holder}
+    * [Base content fragment]{#ref_activities_base_content}
     * Progress
     * Toolbar
     * Left menu
@@ -32,6 +32,8 @@ Main idea to have activity with one main fragment called content fragment (inher
 and navigate form one ContentFragment to another like switching pages in browser. Other activities inherits this
 behavior and add some more features. Base activity can be chosen according to your needs.
 
+
+<a name="ref_activities_base_content_holder"/>
 ## 1.1 Base content holder
 
 Interface ContentFragmentHolder has all features of all stack of template activities. If some functions are not applyable
@@ -50,6 +52,7 @@ Functions to inherit:
 and do call exit stuff if confirmed 
 - do some stuff on exit: onExit
 
+<a name="ref_activities_base_content"/>
 ## 1.2 Base content fragment
 
 Holds reference to content holder activity and can be used only inside such activity. 
@@ -81,18 +84,6 @@ int getMenuId()                  | for activity with left menu. current menu to 
 boolean hasLeftMenu()            | for activity with left menu. if false will hide menu and show back arrow     
 ArgumentsBuilder arguments()     |  simple builder to pass argument to frgamnet (just helper for setArguments)  
 
-
-
-First Header  | Second Header
-------------- | -------------
-Content Cell  | Content Cell
-Content Cell  | Content Cell
-
-
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
 
 
 
