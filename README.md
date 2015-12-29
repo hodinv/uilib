@@ -1,10 +1,10 @@
-UILib
-=====
+# UILib
+=======
 
 Boilerplate for application with some common types of applications and some helpers
 
-Main parts
-----------
+# Main parts
+------------
  
 1. [Activities templates](#ref_activities)
     * [Base content fragment holder](#ref_activities_base_content_holder)
