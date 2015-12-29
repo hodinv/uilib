@@ -16,7 +16,7 @@ public class ContentHolderActivity extends AppCompatActivity implements ContentF
      * Return base layout for activity
      * Layout should contain resurce iten with id=lyt_content
      *
-     * @return laout resurce id
+     * @return laout resource id
      */
     public int getDefaultLayout() {
         return R.layout.activity_content_holder;
@@ -82,7 +82,6 @@ public class ContentHolderActivity extends AppCompatActivity implements ContentF
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,9 +90,9 @@ public class ContentHolderActivity extends AppCompatActivity implements ContentF
 
 
     /**
-     * Clears fragment stack and start new fragemtn
+     * Clears fragment stack and start new fragment
      *
-     * @param contentFragment
+     * @param contentFragment fragment to start
      */
     @Override
     public void startFragment(ContentFragment contentFragment) {
@@ -108,9 +107,9 @@ public class ContentHolderActivity extends AppCompatActivity implements ContentF
     }
 
     /**
-     * Starts new fragment, prev svaed in backstack
+     * Starts new fragment, prev saved in backstack
      *
-     * @param contentFragment
+     * @param contentFragment fragment to start
      */
     @Override
     public void startFragmentWithStacking(ContentFragment contentFragment) {
@@ -129,6 +128,10 @@ public class ContentHolderActivity extends AppCompatActivity implements ContentF
         return (ContentFragment) getSupportFragmentManager().findFragmentById(R.id.lyt_content);
     }
 
+
+    /**
+     * In base fragment holder this methods do nothing - they are for more complex activities
+     */
 
 
     @Override
@@ -213,7 +216,6 @@ public class ContentHolderActivity extends AppCompatActivity implements ContentF
             immediateFinish();
         }
     };
-
 
 
 }

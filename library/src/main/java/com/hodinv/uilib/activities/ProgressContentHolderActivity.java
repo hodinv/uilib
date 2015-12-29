@@ -18,12 +18,20 @@ public class ProgressContentHolderActivity extends ContentHolderActivity {
     private View mProgress;
     private TextView mProgressTtitle;
 
-
+    /**
+     * Return base layout for activity
+     * Layout should contain resurce iten with id=lyt_content
+     *
+     * @return laout resource id
+     */
     @Override
     public int getDefaultLayout() {
         return R.layout.activity_progress_content_holder;
     }
 
+    /**
+     * Setup UI in OnCreate
+     */
     @Override
     public void setupUI() {
         super.setupUI();
@@ -32,6 +40,9 @@ public class ProgressContentHolderActivity extends ContentHolderActivity {
     }
 
 
+    /**
+     * Makes progress visible with no title
+     */
     @Override
     public void showProgress() {
         if (mProgress != null) {
@@ -42,13 +53,21 @@ public class ProgressContentHolderActivity extends ContentHolderActivity {
         }
     }
 
-
+    /**
+     * Perform standard back logic with confirm. Here also hides progress
+     *
+     * @param soft if true than caused be menu back pressed. if false - hardware back button was pressed.
+     */
     @Override
     protected void goBack(boolean soft) {
         hideProgress();
         super.goBack(soft);
     }
 
+    /**
+     * Show progress with title
+     * @param titleId string resource for progress title
+     */
     @Override
     public void showProgress(int titleId) {
         if (mProgress != null) {
@@ -61,6 +80,11 @@ public class ProgressContentHolderActivity extends ContentHolderActivity {
 
     }
 
+    /**
+     * Show progress with title
+     *
+     * @param title progress title
+     */
     @Override
     public void showProgress(String title) {
         if (mProgress != null) {
@@ -72,6 +96,10 @@ public class ProgressContentHolderActivity extends ContentHolderActivity {
         }
     }
 
+
+    /**
+     * Hides progress
+     */
     @Override
     public void hideProgress() {
         if (mProgress != null) {

@@ -83,6 +83,15 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
     }
 
 
+    /**
+     * Activity with left menu check this function to decide what to show - menu ot back arrow
+     *
+     * @return true if fragment needs left menu, false if it is child fragment and handles onle soft back logic
+     */
+    public boolean hasLeftMenu() {
+        return true;
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -104,7 +113,7 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
     /**
      * Performs action only if fragment has ref to activity
      *
-     * @param action
+     * @param action holder to run action if attached to activity
      */
     protected void checkRef(IfHasActivity action) {
         ContentFragmentHolder holder = mHolderRef.get();
@@ -116,8 +125,8 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
     /**
      * Performs action only if fragment has ref to activity
      *
-     * @param action
-     * @param actionIfNoActivity
+     * @param action             holder to run action if attached to activity
+     * @param actionIfNoActivity runnable to run if not attached to activity
      */
     protected void checkRef(IfHasActivity action, Runnable actionIfNoActivity) {
         ContentFragmentHolder holder = mHolderRef.get();
@@ -126,8 +135,15 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         }
     }
 
-
+    /**
+     * Interace for running action if has attached activity
+     */
     protected interface IfHasActivity {
+        /**
+         * Action to preform
+         *
+         * @param holder activity that holds current fragment
+         */
         void doAction(@NonNull ContentFragmentHolder holder);
     }
 
@@ -158,12 +174,17 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
     /**
      * Return id of left menu to show as selected (as current)
      *
-     * @return
+     * @return menu id to show selected or 0 for no selected menu
      */
     public int getMenuId() {
         return 0;
     }
 
+    /**
+     * Clears fragment stack and start new fragment
+     *
+     * @param contentFragment fragment to start
+     */
     @Override
     public void startFragment(final ContentFragment contentFragment) {
         checkRef(new IfHasActivity() {
@@ -174,6 +195,11 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         });
     }
 
+    /**
+     * Starts new fragment, prev saved in backstack
+     *
+     * @param contentFragment fragment to start
+     */
     @Override
     public void startFragmentWithStacking(final ContentFragment contentFragment) {
         checkRef(new IfHasActivity() {
@@ -184,11 +210,11 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         });
     }
 
-    public boolean hasLeftMenu() {
-        return true;
-    }
-
-
+    /**
+     * Set title for current activity
+     *
+     * @param title title to show
+     */
     @Override
     public void setTitle(final CharSequence title) {
         checkRef(new IfHasActivity() {
@@ -199,6 +225,11 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         });
     }
 
+    /**
+     * Set title for current activity
+     *
+     * @param titleId string resource if to set as title
+     */
     @Override
     public void setTitle(final int titleId) {
         checkRef(new IfHasActivity() {
@@ -209,6 +240,9 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         });
     }
 
+    /**
+     * Toggle left menu on-off if has one in activity
+     */
     @Override
     public void toggleMenu() {
         checkRef(new IfHasActivity() {
@@ -219,6 +253,11 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         });
     }
 
+    /**
+     * Enable ot disable left menu in activity if has one
+     *
+     * @param enabled true to enable menu
+     */
     @Override
     public void setMenuEnabled(final boolean enabled) {
         checkRef(new IfHasActivity() {
@@ -229,6 +268,9 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         });
     }
 
+    /**
+     * Makes progress visible with no title
+     */
     @Override
     public void showProgress() {
         checkRef(new IfHasActivity() {
@@ -239,6 +281,9 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         });
     }
 
+    /**
+     * Hides progress
+     */
     @Override
     public void hideProgress() {
         checkRef(new IfHasActivity() {
@@ -250,6 +295,11 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
 
     }
 
+    /**
+     * Show progress with title
+     *
+     * @param titleId string resource for progress title
+     */
     @Override
     public void showProgress(final int titleId) {
         checkRef(new IfHasActivity() {
@@ -261,6 +311,11 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
 
     }
 
+    /**
+     * Show progress with title
+     *
+     * @param title progress title
+     */
     @Override
     public void showProgress(final String title) {
         checkRef(new IfHasActivity() {
@@ -271,6 +326,11 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
         });
     }
 
+    /**
+     * Run in UI thread of activity. For content fragment runnable may not be run if frgamnet is not attached
+     *
+     * @param runnable to run in UI thread
+     */
     @Override
     public void runOnUiThread(final Runnable runnable) {
         checkRef(new IfHasActivity() {
@@ -282,15 +342,28 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
     }
 
 
+    /**
+     * Vreates builder for current fragemnt to help with setting arguments
+     *
+     * @return builder for arguments
+     */
     public ArgumentsBuilder arguments() {
         return new ArgumentsBuilder(this);
     }
 
 
+    /**
+     * Builder for arguments
+     */
     public static class ArgumentsBuilder {
         private final Bundle mBundle;
         private ContentFragment mContentFragment;
 
+        /**
+         * Creates builder for fragment arguments
+         *
+         * @param contentFragment fragment to set arguments for
+         */
         public ArgumentsBuilder(ContentFragment contentFragment) {
             mContentFragment = contentFragment;
             mBundle = new Bundle();
@@ -327,6 +400,11 @@ public class ContentFragment extends Fragment implements ContentFragmentHolder {
             return this;
         }
 
+        /**
+         * Creates arguemnts bundle and set as arguemnts for fragment
+         *
+         * @return ready to start fragment with arguments already set
+         */
         public ContentFragment build() {
             mContentFragment.setArguments(mBundle);
             return mContentFragment;
