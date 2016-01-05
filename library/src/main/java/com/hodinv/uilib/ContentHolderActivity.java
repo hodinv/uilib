@@ -14,7 +14,7 @@ public class ContentHolderActivity extends AppCompatActivity implements ContentF
 
     /**
      * Return base layout for activity
-     * Layout should contain resurce iten with id=lyt_content
+     * Layout should contain resource item with id=lyt_content
      *
      * @return laout resource id
      */

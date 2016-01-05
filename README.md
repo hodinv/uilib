@@ -3,6 +3,15 @@ UILib
 
 Boilerplate for application with some common types of applications and some helpers
 
+Add dependency using gradle
+---------------------------
+
+
+```Groovy
+compile 'com.hodinv:ui-lib:0.1'
+```
+
+
 Main parts
 -------------
  
@@ -10,8 +19,8 @@ Main parts
     * [Base content fragment holder](#ref_activities_base_content_holder)
     * [Base content fragment](#ref_activities_base_content)
     * [Progress](#ref_activities_progress)
-    * Toolbar
-    * Left menu
+    * [Toolbar](#ref_activities_toolbar)
+    * [Left menu](#ref_activities_left_menu)
 2. Async process handling
     * Async tasks bases
     * RxJava based
@@ -61,12 +70,12 @@ Example for set title. checkRef will check of base activty is still presend and 
 in doAction passing content fragment holder interface
 
 ```JAVA
-        checkRef(new IfHasActivity() {
-            @Override
-            public void doAction(@NonNull ContentFragmentHolder holder) {
-                holder.setTitle(title);
-            }
-        });
+checkRef(new IfHasActivity() {
+    @Override
+    public void doAction(@NonNull ContentFragmentHolder holder) {
+        holder.setTitle(title);
+    }
+});
 ```
 
 All ContentFragmentHolder methods are wrapped in such manner and delegated to activity. So you can safly call them and will not get NPE.
@@ -99,25 +108,67 @@ void hideProgress               | Hides progress (for left menu activity if menu
 void showProgress(int titleId)  | show progress with title from string resource
 void showProgress(String title) | show progress with title 
 
+<a name="ref_activities_toolbar"/>
+## 1.4 Toolbar
+Activity with toolbar - ToolbarContentHolderActivity. Layout id for toolbar = lyt_toolbar
+It uses showToolbar method from content fragment to show/hide toolbar (for support fullscreen activities)
+Also as it uses toolbar we need to switch of standard action bar - adding for ex. style without toolbar for activity
+Without it we will get runtime error on start
+
+```XML
+<application           
+        android:theme="@style/AppTheme">
+        <!-- ..... -->
+        </application>
+```
+
+and defining theme as 
+
+```XML
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+```
+Here how application layout looks for toolbar activity
+
+```XML
+ <!-- some xml here -->
+ <android.support.v7.widget.Toolbar
+             android:id="@+id/lyt_toolbar"
+             android:layout_width="match_parent"
+             android:layout_height="?attr/actionBarSize"
+             android:background="?attr/colorPrimary"
+             app:layout_collapseMode="pin"
+             app:theme="?attr/actionBarTheme"/>
+ <!-- some xml there -->
+```
+we need to set proper theme usage for toolbar because if we not do this we will have wrong colors (as they defined in NoActionBar theme
+
+<a name="ref_activities_left_menu"/>
+## 1.5 Left menu
+Adds left menu with drawer to tollbar activity. For styling see [Toolbar](#ref_activities_toolbar) - you will need to remove standard action bar in order to use it
+Activity uses fragment's method hasLeftMenu to enable/disable left menu (in disabled mode replaced with back arrow treated  as soft back)
+Also uses fragment method getMenuId to show one of menu items as current (sets selected state)
+Showing progress will disable menu untill progress is hide. Than previouse state (enabled/disabled) will be restored.
+
+You will need to define some methods:
+
+Method                           | Info
+---------------------------------|---------------------------------------------------------------------------------
+public int[] getMenuIds()        | array of ids of items in menu processed as menu items (can be pressed and selected)
+int getMenuLayout()              | layout resource to use as menu (will be inflated into menu area)
+
+Also you can use some methods (they are already called from content fargment)
+
+Method                                | Info
+--------------------------------------|---------------------------------------------------------------------------------
+void toggleMenu()                     | Toggle menu to show/hide
+void setMenuEnabled(boolean enabled)  | Sets menu mode or back arrow mode (disabled menu)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-....
-(end)

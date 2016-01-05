@@ -9,7 +9,7 @@ import com.hodinv.uilib.R;
 
 /**
  * Created by Vasily Hodin on 8.7.15.
- * Handles toolar operations. Activity should remove standart action bar via theme
+ * Handles toolbar operations. Activity should remove standard action bar via theme
  * Toolbar id = lyt_toolbar
  */
 public class ToolbarContentHolderActivity extends ProgressContentHolderActivity {
@@ -21,6 +21,10 @@ public class ToolbarContentHolderActivity extends ProgressContentHolderActivity 
 
     private Toolbar mToolbar;
 
+
+    /**
+     * Setup UI in OnCreate
+     */
     @Override
     public void setupUI() {
         super.setupUI();
@@ -30,7 +34,12 @@ public class ToolbarContentHolderActivity extends ProgressContentHolderActivity 
         }
     }
 
-
+    /**
+     * Change the title associated with this activity.  If this is a
+     * top-level activity, the title for its window will change.  If it
+     * is an embedded activity, the parent can do whatever it wants
+     * with it.
+     */
     @Override
     public void setTitle(CharSequence title) {
         super.setTitle(title);
@@ -39,6 +48,12 @@ public class ToolbarContentHolderActivity extends ProgressContentHolderActivity 
         }
     }
 
+    /**
+     * Change the title associated with this activity.  If this is a
+     * top-level activity, the title for its window will change.  If it
+     * is an embedded activity, the parent can do whatever it wants
+     * with it.
+     */
     @Override
     public void setTitle(int titleId) {
         super.setTitle(titleId);
@@ -47,6 +62,9 @@ public class ToolbarContentHolderActivity extends ProgressContentHolderActivity 
         }
     }
 
+    /**
+     * Occurs just after fragment changes - here can be updated for ex. title
+     */
     @Override
     public void updateUI() {
         super.updateUI();
@@ -57,6 +75,15 @@ public class ToolbarContentHolderActivity extends ProgressContentHolderActivity 
         }
     }
 
+    /**
+     * Return base layout for activity
+     * Layout should contain resource item with id=lyt_content
+     * progressbar id = lyt_progress
+     * progressbar title = txt_progress_title
+     * Toolbar id = lyt_toolbar
+     *
+     * @return layout resource id
+     */
     @Override
     public int getDefaultLayout() {
         return R.layout.activity_toolbar_progress_content_holder;

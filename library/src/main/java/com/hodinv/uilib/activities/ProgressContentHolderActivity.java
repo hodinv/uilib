@@ -20,9 +20,11 @@ public class ProgressContentHolderActivity extends ContentHolderActivity {
 
     /**
      * Return base layout for activity
-     * Layout should contain resurce iten with id=lyt_content
+     * Layout should contain resource item with id=lyt_content
+     * progressbar id = lyt_progress
+     * progressbar title = txt_progress_title
      *
-     * @return laout resource id
+     * @return layout resource id
      */
     @Override
     public int getDefaultLayout() {

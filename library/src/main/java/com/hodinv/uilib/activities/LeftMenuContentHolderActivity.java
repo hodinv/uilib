@@ -28,7 +28,17 @@ public class LeftMenuContentHolderActivity extends ToolbarContentHolderActivity 
     private ActionBarDrawerToggle mDrawerToggle;
     private boolean mMenuEnabled = true;
 
-
+    /**
+     * Return base layout for activity
+     * Layout should contain resource item with id=lyt_content
+     * progressbar id = lyt_progress
+     * progressbar title = txt_progress_title
+     * Toolbar id = lyt_toolbar
+     * left menu id = view_left_menu
+     * drawer id = lyt_drawer
+     *
+     * @return layout resource id
+     */
     @Override
     public int getDefaultLayout() {
         return R.layout.activity_left_menu_content_holder;
@@ -37,7 +47,7 @@ public class LeftMenuContentHolderActivity extends ToolbarContentHolderActivity 
     /**
      * Return resource ids for menu items
      *
-     * @return
+     * @return array of ids of items in menu processed as menu items (can be pressed and selected)
      */
     public int[] getMenuIds() {
 
@@ -48,7 +58,7 @@ public class LeftMenuContentHolderActivity extends ToolbarContentHolderActivity 
     /**
      * Returns layout id for menu
      *
-     * @return
+     * @return layout resource to use as menu (will be inflated into menu area)
      */
     public int getMenuLayout() {
         return R.layout.empty_menu;
@@ -70,7 +80,9 @@ public class LeftMenuContentHolderActivity extends ToolbarContentHolderActivity 
         return super.onKeyUp(keyCode, event);
     }
 
-
+    /**
+     * Setup UI in OnCreate
+     */
     @Override
     public void setupUI() {
         super.setupUI();
@@ -105,6 +117,10 @@ public class LeftMenuContentHolderActivity extends ToolbarContentHolderActivity 
         }
     }
 
+
+    /**
+     * Occurs just after fragment changes - here can be updated for ex. title
+     */
     @Override
     public void updateUI() {
         super.updateUI();
@@ -121,6 +137,11 @@ public class LeftMenuContentHolderActivity extends ToolbarContentHolderActivity 
         }
     }
 
+    /**
+     * Gets current menu id from curent fragment is already loaded
+     *
+     * @return current menu item id
+     */
     private int getCurrentMenuId() {
         ContentFragment fragment = getCurrentFragment();
         return fragment == null ? 0 : fragment.getMenuId();
@@ -166,7 +187,9 @@ public class LeftMenuContentHolderActivity extends ToolbarContentHolderActivity 
         }
     };
 
-
+    /**
+     * Toggle left menu on-off
+     */
     @Override
     public void toggleMenu() {
         if (mDrawerLayout.isDrawerOpen(mLeftMenu)) {
@@ -177,6 +200,11 @@ public class LeftMenuContentHolderActivity extends ToolbarContentHolderActivity 
 
     }
 
+    /**
+     * Enable ot disable left menu in activity if has one
+     *
+     * @param enabled true to enable menu
+     */
     @Override
     public void setMenuEnabled(boolean enabled) {
         mMenuEnabled = enabled;
@@ -196,38 +224,63 @@ public class LeftMenuContentHolderActivity extends ToolbarContentHolderActivity 
         }
     }
 
-
+    /**
+     * Makes progress visible with no title
+     */
     @Override
     public void showProgress() {
         super.showProgress();
         processMenuEnabling(false);
     }
 
+    /**
+     * Show progress with title
+     *
+     * @param titleId string resource for progress title
+     */
     @Override
     public void showProgress(int titleId) {
         super.showProgress(titleId);
         processMenuEnabling(false);
     }
 
+    /**
+     * Show progress with title
+     *
+     * @param title progress title
+     */
     @Override
     public void showProgress(String title) {
         super.showProgress(title);
         processMenuEnabling(false);
     }
 
+
+    /**
+     * Hides progress
+     */
     @Override
     public void hideProgress() {
         super.hideProgress();
         processMenuEnabling(mMenuEnabled);
     }
 
-
+    /**
+     * Clears fragment stack and start new fragment
+     *
+     * @param contentFragment fragment to start
+     */
     @Override
     public void startFragment(ContentFragment contentFragment) {
         super.startFragment(contentFragment);
         setMenuEnabled(contentFragment.hasLeftMenu());
     }
 
+    /**
+     * Starts new fragment, prev saved in backstack
+     *
+     * @param contentFragment fragment to start
+     */
     @Override
     public void startFragmentWithStacking(ContentFragment contentFragment) {
         super.startFragmentWithStacking(contentFragment);
@@ -244,6 +297,11 @@ public class LeftMenuContentHolderActivity extends ToolbarContentHolderActivity 
 
     }
 
+    /**
+     * Return if menu is currently enabled
+     *
+     * @return true of menu is enabled
+     */
     protected boolean isMenuEnabled() {
         return mMenuEnabled;
     }
