@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 /**
  * Created by vhodin on 17.12.2015.
+ * AsyncTask that can be processed in AsyncTasksContentFragment
  */
 public abstract class ControlledAsyncTask<Progress, Result> extends AsyncTask<Object, Progress, Result> {
 
@@ -17,6 +18,11 @@ public abstract class ControlledAsyncTask<Progress, Result> extends AsyncTask<Ob
 
     private volatile Throwable error;
 
+    /**
+     * Called from frgamne to register holder
+     *
+     * @param contentFragment that holds this task
+     */
     void registerFragment(AsyncTasksContentFragment contentFragment) {
         mContentFragment = contentFragment;
     }
@@ -27,6 +33,10 @@ public abstract class ControlledAsyncTask<Progress, Result> extends AsyncTask<Ob
         super.onCancelled();
     }
 
+    /**
+     * Main method that produces result. If throws exception this exception will be passed to future
+     * @return produced result
+     */
     protected abstract Result doInBackground();
 
     @Override
@@ -42,7 +52,7 @@ public abstract class ControlledAsyncTask<Progress, Result> extends AsyncTask<Ob
     @Override
     protected final void onPostExecute(Result result) {
         mContentFragment.taskDone(this);
-        if(error == null) {
+        if (error == null) {
             mCallback.onSuccess(result);
         } else {
             mCallback.onFailure(error);

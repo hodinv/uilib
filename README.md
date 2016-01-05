@@ -21,9 +21,9 @@ Main parts
     * [Progress](#ref_activities_progress)
     * [Toolbar](#ref_activities_toolbar)
     * [Left menu](#ref_activities_left_menu)
-2. Async process handling
-    * Async tasks bases
-    * RxJava based
+2. [Async process handling](#ref_async)
+    * [Async tasks bases](#ref_async_task)
+    * [RxJava based](#ref_async_rx)
 3. Helpers
     * dialogs
     * enums titles
@@ -159,16 +159,54 @@ Showing progress will disable menu untill progress is hide. Than previouse state
 You will need to define some methods:
 
 Method                           | Info
----------------------------------|---------------------------------------------------------------------------------
+---------------------------------|-------------------------------------------------------------------------------------
 public int[] getMenuIds()        | array of ids of items in menu processed as menu items (can be pressed and selected)
 int getMenuLayout()              | layout resource to use as menu (will be inflated into menu area)
 
 Also you can use some methods (they are already called from content fargment)
 
 Method                                | Info
---------------------------------------|---------------------------------------------------------------------------------
+--------------------------------------|----------------------------------------------------
 void toggleMenu()                     | Toggle menu to show/hide
 void setMenuEnabled(boolean enabled)  | Sets menu mode or back arrow mode (disabled menu)
 
+<a name="ref_async"/>
+# 2. Async process handling
+This classes are based on content fragments (and can be used on content holders activities) and added some
+logic for running processes
+
+<a name="ref_async_task"/>
+## 2.1 Async tasks bases
+This classes based on AsyncTask. Log is to run async task while fragment is not stopped. In onStop all running tasks will be canceled.
+AsyncTask should be child of ControlledAsyncK=Task with logic of adding and removing from list of running tasks of fragment
+ 
+Method to override in ControlledAsyncTask:
+
+Method                                | Info
+--------------------------------------|-----------------------------------
+Result doInBackground()               | return result or throws exception
+
+Future to process result or error is passed in constructor. Future methods will be called from UI thread.
+
+Method to start task in AsyncTaskContentFragment
+
+Method                                                | Info
+------------------------------------------------------|---------------------------------------------------------------------------------
+void startTask(final ControlledAsyncTask taskToStart) | Starts task and adds it to lasks list. Also pass self to task as holder
 
 
+<a name="ref_async_rx"/>
+## 2.3 RxJava based
+
+RxContentFragment adds logic to connect RxJava observable with ContentFragment lifecycle. 
+If subscription was "add" it will be connected to lifecycle. If fargment will be stopped subscriptions will be unsubscribed so callback will not occure.
+If fragment will be started once more - subscriptions will be renewed and data will produced.
+If subscription was "run" - it will be only run in proper thread - no connection to lifecycle, just helper
+
+Methods that can be used to add/run subscription
+
+Method                                                                                              | Info
+----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------
+<T> void addSubscription(Observable.OnSubscribe<T> subscription, final Observer<? super T> action)  | add observable onsubscribe interface to fragments lifecycle and connects action to it
+<T> void addSubscription(Observable<T> observable, final Observer<? super T> action)                | add observable to fragments lifecycle and connects action to it
+void runSubscription(Observable<?> observable)                                                      | helper to just run observable in proper threads

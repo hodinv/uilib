@@ -19,6 +19,11 @@ public class AsyncTasksContentFragment extends ContentFragment {
     private List<ControlledAsyncTask> taskToCancel = new LinkedList<>();
 
 
+    /**
+     * Starts task and adds it to lasks list. Also pass self to task as holder
+     *
+     * @param taskToStart task that should be started
+     */
     @SuppressWarnings({"rawtypes", "unchecked"})
     public void startTask(final ControlledAsyncTask taskToStart) {
         checkRef(new IfHasActivity() {
