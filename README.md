@@ -24,17 +24,16 @@ Main parts
 2. [Async process handling](#ref_async)
     * [Async tasks bases](#ref_async_task)
     * [RxJava based](#ref_async_rx)
-3. Helpers
-    * dialogs
-    * enums titles
-    * files
-    * keyboard
-    * numbers
-    * resources
-    * TextView based switcher
+3. [Helpers](#ref_helpers)
+    * [Dialogs](#ref_helpers_dialogs)
+    * [Enums titles](#ref_helpers_enums)
+    * [Files](#ref_helpers_files)
+    * [Keyboard](#ref_helpers_keyboard)
+    * [Numbers](#ref_helpers_numbers)
+    * [Resources](#ref_helpers_resources)
+    * [TextView based switcher](#ref_helpers_textview)
  
 <a name="ref_activities"/>
-
 # 1. Activities 
 
 Main idea to have activity with one main fragment called content fragment (inherited from ContentFragment) 
@@ -210,3 +209,43 @@ Method                                                                          
 <T> void addSubscription(Observable.OnSubscribe<T> subscription, final Observer<? super T> action)  | add observable onsubscribe interface to fragments lifecycle and connects action to it
 <T> void addSubscription(Observable<T> observable, final Observer<? super T> action)                | add observable to fragments lifecycle and connects action to it
 void runSubscription(Observable<?> observable)                                                      | helper to just run observable in proper threads
+
+<a name="ref_helpers"/>
+# 3. Helpers
+
+Here some helpers for common routines.
+
+<a name="ref_helpers_dialogs"/>
+## 3.1 Dialogs
+
+Helper for creating some tandard dialogs
+
+Method                                                                              | Info
+------------------------------------------------------------------------------------|---------------------------------------------------------------------------------
+AlertDialog showAlert(Context context, String title, String message)                | Just alert with message
+void showAlert(Context context, String title, String message, final Runnable onOk)  | Alert with message and action on OK pressed
+<T> void showSelect(Context context, String title, Map<T, String> values, T current, final OnSelect<T> callback) | shows dialog with items to select (map with item and title) and if slected pass it to OnSelect callback
+void askConfirm(Context context, String title, String message, String okLabel, final Runnable onOk) | Dialog to confirm action. With message, title, label for confirm action and runnable to do if confirmed
+
+
+
+<a name="ref_helpers_enums"/>
+## 3.2 Enums titles
+
+
+
+
+<a name="ref_helpers_files"/>
+## 3.3 Files
+
+<a name="ref_helpers_keyboard"/>
+## 3.4 Keyboard
+
+<a name="ref_helpers_numbers"/>
+## 3.5 Numbers
+
+<a name="ref_helpers_resources"/>
+## 3.6 Resources
+
+<a name="ref_helpers_textview"/>
+## 3.7 TextView based switcher
