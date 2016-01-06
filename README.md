@@ -32,6 +32,7 @@ Main parts
     * [Numbers](#ref_helpers_numbers)
     * [Resources](#ref_helpers_resources)
     * [TextView based switcher](#ref_helpers_textview)
+4. [Logger](#ref_logger)
  
 <a name="ref_activities"/>
 # 1. Activities 
@@ -232,20 +233,96 @@ void askConfirm(Context context, String title, String message, String okLabel, f
 <a name="ref_helpers_enums"/>
 ## 3.2 Enums titles
 
+Helper to manage titles for enums.
+Here example for some enums
+
+```JAVA
+public enum Demo1 {
+    VALUE1, VALUE2
+}
 
 
+public enum Demo2 {
+    VALUE3, VALUE4
+}
+
+public enum Demo3 {
+    VALUE4, VALUE5
+}
+```
+
+Define string resources for enums. Here demo with prefix and with prefix and suffix and without both:
+
+```XML
+<!-- titles for Demo1 -->
+<string name="str_demo1_value1">First value</string>
+<string name="str_demo1_value2">Second value</string>
+
+<!-- titles for Demo2 -->
+<string name="str_demo2_value3_label">First value</string>
+<string name="str_demo2_value4_label">Second value</string>
+
+<!-- titles for Demo3 -->
+<string name="demo3_value5">First value</string>
+<string name="demo3_value6">Second value</string>
+```
+
+
+Then init EnumsHelper (better in Application onCreate)
+
+```JAVA
+@Override
+public void onCreate() {
+    super.onCreate();
+    EnumsHelper.init(this);
+    EnumsHelper.getInstance().loadEnum(Demo1.class, "str", null)
+    EnumsHelper.getInstance().loadEnum(Demo2.class, "str", "label")
+    EnumsHelper.getInstance().loadEnum(Demo3.class);
+}
+
+```
+
+And here is demo for usage
+ 
+```JAVA
+String title = EnumsHelper.getInstance().getTitle(Demo1.VALUE1);
+```
 
 <a name="ref_helpers_files"/>
 ## 3.3 Files
 
+This helper for creating files in data directory with processing cases where getExternalFilesDir returns null.
+Steps are next
+* First try to get directory from context method getExternalFilesDir
+* If got null - check if extarnal storage present (Environment.getExternalStorageDirectory())
+* If no - throws RuntimeException
+* If has - target directory will be  Environment.getExternalStorageDirectory() + "/Android/data/" + package name + type (if not null)
+* Then check and creates directory if still not exists
+
+
+Method                                                                   | Info
+-------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------
+File getDataDir(Context context, @Nullable String fileType)              | Creates directory in standard place for application by type
+File getDataDir(Context context)                                         | Creates directory in standard place for application
+File getFileByName(Context context, String fileName, String fileType)    | Returns file (not created) in directory (created if not existed) in standart place for application by type
+File getFileByName(Context context, String fileName)                     | Returns file (not created) in directory (created if not existed) in standart place for application
+
+
 <a name="ref_helpers_keyboard"/>
 ## 3.4 Keyboard
 
+Just method to force hide of keyboard
+
 <a name="ref_helpers_numbers"/>
 ## 3.5 Numbers
+
+
 
 <a name="ref_helpers_resources"/>
 ## 3.6 Resources
 
 <a name="ref_helpers_textview"/>
 ## 3.7 TextView based switcher
+
+<a name="ref_logger"/>
+# 4. Logger 

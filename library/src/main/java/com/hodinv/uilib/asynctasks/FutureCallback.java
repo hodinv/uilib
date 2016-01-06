@@ -1,6 +1,3 @@
-// Developed by Softeq Development Corporation
-// http://www.softeq.com
-
 package com.hodinv.uilib.asynctasks;
 
 /**

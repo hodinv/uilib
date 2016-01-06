@@ -5,11 +5,12 @@ import android.support.annotation.Nullable;
 
 /**
  * Created by vhodin on 22.12.2015.
+ * Helper for numbers parsing
  */
 public class NumbersHelper {
 
     /**
-     * Parse string toi double. Delimente can be , or .
+     * Parse string toi double. Delimiter can be , or .
      *
      * @param doubleStr double string value
      * @return double value or null if error while parsing (null input also null)
@@ -35,6 +36,12 @@ public class NumbersHelper {
         return null;
     }
 
+    /**
+     * Parse string toi double. Delimiter can be , or .
+     *
+     * @param doubleStr double string value
+     * @return double value or 0 if error while parsing (null input also 0)
+     */
     @NonNull
     public static Double parseDoubleNotNull(@Nullable String doubleStr) {
         Double value = parseToDouble(doubleStr);
