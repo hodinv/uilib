@@ -45,6 +45,13 @@ behavior and add some more features. Base activity can be chosen according to yo
 <a name="ref_activities_base_content_holder"/>
 ## 1.1 Base content holder
 
+Type       | Name
+-----------|----------------------
+Interface  | **ContentFragmentHolder**
+Class      | **ContentHolderActivity**
+
+
+
 Interface ContentFragmentHolder has all features of all stack of template activities. If some functions are not applyable
 to selected base activity they will do nothing.
 Base content holder class ContentHolderActivity implements next functionality:
@@ -63,6 +70,11 @@ and do call exit stuff if confirmed
 
 <a name="ref_activities_base_content"/>
 ## 1.2 Base content fragment
+
+Type       | Name
+-----------|----------------------
+Class      | **ContentFragment**
+
 
 Class ContentFragment holds reference to content holder activity and can be used only inside such activity. 
 Has mechanism to do stuff with base activity in safe mode (NPE safe)
@@ -96,6 +108,10 @@ ArgumentsBuilder arguments()     |  simple builder to pass argument to frgamnet 
 <a name="ref_activities_progress"/>
 ## 1.3 Progress
 
+Type       | Name
+-----------|-------------------------------
+Class      | **ProgressContentHolderActivity**
+
 Activity ProgressContentHolderActivity inherits all from ContentFragmentHolderActivty and adds progress functionality
 View from getDefaultLayout should have ProgressBar with id = lyt_progress and TextView for progress title with id = txt_progress_title
 By default progress overlaps all functionality and in next activities 
@@ -110,6 +126,11 @@ void showProgress(String title) | show progress with title
 
 <a name="ref_activities_toolbar"/>
 ## 1.4 Toolbar
+
+Type       | Name
+-----------|-------------------------------
+Class      | **ToolbarContentHolderActivity**
+
 Activity with toolbar - ToolbarContentHolderActivity. Layout id for toolbar = lyt_toolbar
 It uses showToolbar method from content fragment to show/hide toolbar (for support fullscreen activities)
 Also as it uses toolbar we need to switch of standard action bar - adding for ex. style without toolbar for activity
@@ -151,6 +172,11 @@ we need to set proper theme usage for toolbar because if we not do this we will 
 
 <a name="ref_activities_left_menu"/>
 ## 1.5 Left menu
+
+Type       | Name
+-----------|-------------------------------
+Class      | **LeftMenuContentHolderActivity**
+
 Adds left menu with drawer to tollbar activity. For styling see [Toolbar](#ref_activities_toolbar) - you will need to remove standard action bar in order to use it
 Activity uses fragment's method hasLeftMenu to enable/disable left menu (in disabled mode replaced with back arrow treated  as soft back)
 Also uses fragment method getMenuId to show one of menu items as current (sets selected state)
@@ -177,6 +203,15 @@ logic for running processes
 
 <a name="ref_async_task"/>
 ## 2.1 Async tasks bases
+
+Type       | Name
+-----------|-------------------------------
+Interface  | **FutureCallback**
+Class      | **ControlledAsyncTask**
+Class      | **AsyncTasksContentFragment**
+
+
+
 This classes based on AsyncTask. Log is to run async task while fragment is not stopped. In onStop all running tasks will be canceled.
 AsyncTask should be child of ControlledAsyncK=Task with logic of adding and removing from list of running tasks of fragment
  
@@ -197,6 +232,10 @@ void startTask(final ControlledAsyncTask taskToStart) | Starts task and adds it 
 
 <a name="ref_async_rx"/>
 ## 2.3 RxJava based
+
+Type       | Name
+-----------|-------------------------------
+Class      | **RxContentFragment**
 
 RxContentFragment adds logic to connect RxJava observable with ContentFragment lifecycle. 
 If subscription was "add" it will be connected to lifecycle. If fargment will be stopped subscriptions will be unsubscribed so callback will not occure.
@@ -219,6 +258,10 @@ Here some helpers for common routines.
 <a name="ref_helpers_dialogs"/>
 ## 3.1 Dialogs
 
+Type       | Name
+-----------|-------------------------------
+Class      | **DialogHelper**
+
 Helper for creating some tandard dialogs
 
 Method                                                                              | Info
@@ -232,6 +275,10 @@ void askConfirm(Context context, String title, String message, String okLabel, f
 
 <a name="ref_helpers_enums"/>
 ## 3.2 Enums titles
+
+Type       | Name
+-----------|-------------------------------
+Class      | **EnumsHelper**
 
 Helper to manage titles for enums.
 Here example for some enums
@@ -291,6 +338,10 @@ String title = EnumsHelper.getInstance().getTitle(Demo1.VALUE1);
 <a name="ref_helpers_files"/>
 ## 3.3 Files
 
+Type       | Name
+-----------|-------------------------------
+Class      | **FilesHelper**
+
 This helper for creating files in data directory with processing cases where getExternalFilesDir returns null.
 Steps are next
 * First try to get directory from context method getExternalFilesDir
@@ -311,18 +362,88 @@ File getFileByName(Context context, String fileName)                     | Retur
 <a name="ref_helpers_keyboard"/>
 ## 3.4 Keyboard
 
+Type       | Name
+-----------|-------------------------------
+Class      | **KeyboardHelper**
+
 Just method to force hide of keyboard
 
 <a name="ref_helpers_numbers"/>
 ## 3.5 Numbers
 
+Type       | Name
+-----------|-------------------------------
+Class      | **NumbersHelper**
 
+Here methods to parse double values that can be separated by comma or dot
 
 <a name="ref_helpers_resources"/>
 ## 3.6 Resources
 
+Type       | Name
+-----------|-------------------------------
+Class      | **ResourcesHelper**
+
+Helper to get all resource values from R class filtering by name
+
+Example for getting all ids that names startes from "menu_"
+
+```JAVA
+@Override
+public int[] getMenuIds() {
+    return ResourcesHelper.loadResourcesIds(R.id.class, new ResourcesHelper.Filter() {
+        @Override
+        public boolean match(String name) {
+            return name.startsWith("menu_");
+        }
+    });
+}
+```
+
 <a name="ref_helpers_textview"/>
 ## 3.7 TextView based switcher
 
+Type       | Name
+-----------|-------------------------------
+Class      | **TextViewSwitcher**
+
+Adds similar to RadioGroup/RadioButtons behavior to set of text views.
+
+If view is clicked you will will get its pos in callback (from 0 to count-1)
+Clicked items gots state selected. For others such state is cleared.
+
+
 <a name="ref_logger"/>
 # 4. Logger 
+
+Type       | Name
+-----------|-------------------------------
+Class      | **Log**
+
+Wraps common methods (d/w/i/v/e) for standard Andorid Log class with adding functionality to save logging to file
+
+You need to init log in Application.onCreate in order to use it. If you want to setup thrsholds (size limits etc.) you should do it before initializing.
+
+Logs are saved in external storage
+
+Setup methods:
+
+Method                                                        | Default value | Info
+--------------------------------------------------------------|---------------|----------------------------------------------
+void setMinimalStorageFreeSpaceToRunLogging(long sizeInBytes) | 100Mb         | Minimal free space on SD for logging to start
+void setLoggerFolder(String loggerFolder)                     | logger        | folder in /Android/data/package/ to save logs
+void setMaxSizeOfLogFile(int maxSizeOfLogFile)                | 1Mb           | Maximum size for one log file
+void setNumberOfLogFiles(int numberOfLogFiles)                | 30            | Number of files to save 
+
+Other methods:
+
+Method                                                                        |  Info
+------------------------------------------------------------------------------|----------------------
+void initLogger(int level, int fileLevel, boolean logToFile, Context context) | init logging
+void v(String TAG, String msg)                                                | log verbose message
+void d(String TAG, String msg)                                                | log debug message
+void i(String TAG, String msg)                                                | log info message
+void w(String TAG, String msg)                                                | log warning message
+void e(String TAG, String msg)                                                | log error message
+
+

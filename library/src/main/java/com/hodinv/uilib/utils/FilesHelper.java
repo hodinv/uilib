@@ -9,6 +9,7 @@ import java.io.File;
 
 /**
  * Created by vhodin on 22.12.2015.
+ * Helper for working with standard place of files on extarnal storage
  */
 public class FilesHelper {
     /**
