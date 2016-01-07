@@ -8,7 +8,7 @@ Add dependency using gradle
 
 
 ```Groovy
-compile 'com.hodinv:ui-lib:0.1'
+compile 'com.hodinv:ui-lib:0.2'
 ```
 
 
